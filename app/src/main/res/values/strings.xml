@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">Weight</string>
+    <string name="action_settings">Settings</string>
+    <string name="genderTitle">Sexe</string>
+    <string name="enteryourname">Entrez votre nom :</string>
+    <string name="selectyourgender">Selectionnez votre sexe</string>
+    <string name="nameKey">nameKey</string>
+    <string name="genderKey">genderKey</string>
+    <string name="preferences">preferences</string>
+    <string name="enterweight">Poids:</string>
+    <string name="difference">Difference</string>
+    <string name="poids">Poids</string>
+    <string name="date">Date</string>
+    <string name="validate">valider</string>
+
+</resources>
