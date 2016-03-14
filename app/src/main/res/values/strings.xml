@@ -12,5 +12,10 @@
     <string name="poids">Poids</string>
     <string name="date">Date</string>
     <string name="validate">valider</string>
+    <string name="calculatePoint">points</string>
+    <string name="kCal">kCal</string>
+    <string name="pour">Pour</string>
+    <string name="part">Part</string>
+
 
 </resources>
