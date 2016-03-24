@@ -8,14 +8,10 @@ import android.database.Cursor;
 public class Profile {
     private String name;
     private String sex;
-    private float conversionRate;
-    private float numberOfHebdoCalories;
 
     public Profile(Cursor cursor){
         name = cursor.getString(0);
         sex = cursor.getString(1);
-        conversionRate = cursor.getFloat(2);
-        numberOfHebdoCalories = cursor.getFloat(3);
     }
 
     public static String getQuery(){
@@ -36,14 +32,6 @@ public class Profile {
 
     public String setSex(String gender){
         return "Update profile set Sex = \"" + gender + "\"";
-    }
-
-    public float getConversionRate(){
-        return conversionRate;
-    }
-
-    public float getNumberOfHebdoCalories(){
-        return numberOfHebdoCalories;
     }
 
 }

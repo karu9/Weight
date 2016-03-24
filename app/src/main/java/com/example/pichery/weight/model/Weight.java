@@ -4,47 +4,37 @@ import android.database.Cursor;
 
 import com.example.pichery.weight.util.DateUtil;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 /**
  * Created by pichery on 06/12/15.
  */
-public class Weight {
+public class Weight implements Comparable<Weight>{
     String date;
-    Float value;
+    String value;
 
     public Weight(Cursor cursor){
         String stringDate = cursor.getString(0);
         date = stringDate;
-        value = cursor.getFloat(1);
+        value = cursor.getString(1);
+    }
+
+    public Weight(String date, String value){
+        date = date;
+        value = value;
     }
 
     public static String getQuery() {
         return "Select * from Weight order by date DESC";
     }
     
-    public static Weight getFirstWeight(List<Weight> listWeight){
-        if (listWeight == null || listWeight.isEmpty()){
-            return null;
-        }
-        else{
-            Weight min = listWeight.get(0);
-            for(int i = 1; i < listWeight.size(); i++){
-                if(listWeight.get(i).getDate().compareTo(min.getDate())<0){
-                    min = listWeight.get(i);
-                }
-            }
-            return min;
-        }
-
-    }
-    
-    public static float getDeltaWeight(Weight ref, Weight comparedTo){
-        return comparedTo.getValue() - ref.getValue();
+    public static String getDeltaWeight(Weight ref, Weight comparedTo){
+        return String.valueOf(Float.valueOf(ref.getValue()) - Float.valueOf(comparedTo.getValue()));
     }
 
-    public Float getValue() {
+    public String getValue() {
         return value;
     }
 
@@ -52,7 +42,12 @@ public class Weight {
         return date;
     }
 
-    public static String setWeightQuery(Float value){
+    public static String setWeightQuery(String value){
         return "INSERT INTO Weight VALUES ("+DateUtil.formatDate(new Date())+","+value+")";
+    }
+
+    @Override
+    public int compareTo(Weight weight){
+        return DateUtil.getDate(weight.date).compareTo(DateUtil.getDate(this.date));
     }
 }

@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.example.pichery.weight.R;
 import com.example.pichery.weight.util.Calc;
@@ -22,6 +23,13 @@ public class TabCalc extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         return inflater.inflate(R.layout.tab_calc, container, false);
     }
+
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        setListener();
+    }
+
 
     private void setListener() {
         Button button = (Button) getView().findViewById(R.id.calculatePointButton);
@@ -38,8 +46,9 @@ public class TabCalc extends Fragment {
                         float pour = Float.valueOf(pourText.getText().toString());
                         float part = Float.valueOf(partText.getText().toString());
                         if(kCal != 0f && pour != 0f && part != 0f){
-                            int points = Calc.calculatePoints(38f, kCal * part / pour);
-                             partText = (EditText) getView().findViewById(R.id.partText);
+                            int points = Calc.calculatePoints(kCal * part / pour);
+                            TextView resultText = (TextView) getView().findViewById(R.id.pointResultText);
+                            resultText.setText(""+points);
                         }
                     } catch (Exception e) {
 

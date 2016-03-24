@@ -4,12 +4,11 @@ package com.example.pichery.weight.tab;
  * Created by pichery on 29/11/15.
  */
 
-import android.content.DialogInterface;
+import android.content.res.ColorStateList;
+import android.graphics.Color;
 import android.os.Bundle;
-import android.preference.EditTextPreference;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -23,6 +22,8 @@ import com.example.pichery.weight.model.Weight;
 import com.example.pichery.weight.util.DBUtils;
 import com.example.pichery.weight.util.DateUtil;
 
+import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 
 public class TabWeight extends Fragment{
@@ -47,21 +48,26 @@ public class TabWeight extends Fragment{
             @Override
             public void onClick(View v) {
                 EditText text = (EditText) getView().findViewById(R.id.weightText);
-                if(!text.getText().toString().isEmpty()){
-                    try{
+                if (!text.getText().toString().isEmpty()) {
+                    try {
                         String weightString = text.getText().toString();
-                        weightString.replace(',', '.');
+                        weightString = weightString.replace(',', '.');
                         float weightval = Float.parseFloat(weightString);
-                        if(weightval > 50){
-                            dbUtil.execute(Weight.setWeightQuery(weightval));
+                        if (weightval > 50) {
+                            dbUtil.execute(Weight.setWeightQuery(weightString));
+                            text.setText("", TextView.BufferType.EDITABLE);
+                            LinearLayout layout = (LinearLayout) getView().findViewById(R.id.weightContainer);
+                            layout.removeAllViews();
+                            LayoutInflater inflater = LayoutInflater.from(getActivity());
+                            View view = inflater.inflate(R.layout.tab_weight, null);
+                            layout.addView(view);
+                            setValuesFromDb();
+                            TabWeight.this.getView().invalidate();
                         }
-                    }
-                    catch (NumberFormatException e){
+                    } catch (NumberFormatException e) {
 
                     }
                 }
-                text.setText("", TextView.BufferType.EDITABLE);
-                TabWeight.this.onStart();
             }
         });
     }
@@ -69,22 +75,59 @@ public class TabWeight extends Fragment{
     private void setValuesFromDb() {
         LinearLayout layout = (LinearLayout) getView().findViewById(R.id.weightContainer);
         List<Weight> weights = dbUtil.loadWeights();
+        Collections.sort(weights);
         if(weights != null && weights.size() > 0){
-            Weight firstWeight = Weight.getFirstWeight(weights);
-            for(Weight weight : weights){
-                layout.addView(createDbInput(weight.getDate(), weight.getValue(), weight.getValue() - firstWeight.getValue()));
+            Weight firstWeight = weights.get(weights.size()-1);
+            for(int i = 0; i < weights.size(); i++){
+                Weight previousWeight;
+                if (i < weights.size() - 1){
+                    previousWeight = weights.get(i+1);
+                }
+                else{
+                    previousWeight = weights.get(i);
+                }
+                layout.addView(createDbInput(weights.get(i).getDate(), weights.get(i).getValue(), Weight.getDeltaWeight(weights.get(i), previousWeight), Weight.getDeltaWeight(weights.get(i), firstWeight)));
                 layout.addView(createSeparator());
             }
         }
     }
 
-    private LinearLayout createDbInput(String Date, float weight, float delta){
+    private LinearLayout createDbInput(String date, String weight, String previousDelta, String firstDelta){
+        int color = getResources().getColor(R.color.textColor);
+        if(Float.parseFloat(previousDelta) > 0){
+            color = getResources().getColor(R.color.red);
+        }
         LinearLayout ll = new LinearLayout(getActivity());
-        ll.setOrientation(LinearLayout.VERTICAL);
+        ll.setOrientation(LinearLayout.HORIZONTAL);
         LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.FILL_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
         lp.setMargins(25, 0, 25, 0);
         ll.setLayoutParams(lp);
         ll.requestLayout();
+
+        TextView dateView = new TextView(getActivity());
+        dateView.setText(date);
+        dateView.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.FILL_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT, 0.25f));
+        dateView.setTextColor(color);
+        ll.addView(dateView);
+
+        TextView weightView = new TextView(getActivity());
+        weightView.setText(weight);
+        weightView.setTextColor(color);
+        weightView.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.FILL_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT, 0.25f));
+        ll.addView(weightView);
+
+        TextView previousDeltaView = new TextView(getActivity());
+        previousDeltaView.setText(previousDelta);
+        previousDeltaView.setTextColor(color);
+        previousDeltaView.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.FILL_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT, 0.25f));
+        ll.addView(previousDeltaView);
+
+        TextView firstDeltaView = new TextView(getActivity());
+        firstDeltaView.setText(firstDelta);
+        firstDeltaView.setTextColor(color);
+        firstDeltaView.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.FILL_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT, 0.25f));
+        ll.addView(firstDeltaView);
+
         return ll;
     }
 

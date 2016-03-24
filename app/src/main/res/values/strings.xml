@@ -8,7 +8,8 @@
     <string name="genderKey">genderKey</string>
     <string name="preferences">preferences</string>
     <string name="enterweight">Poids:</string>
-    <string name="difference">Difference</string>
+    <string name="difference">Δsemaine</string>
+    <string name="difference2">Δdebut</string>
     <string name="poids">Poids</string>
     <string name="date">Date</string>
     <string name="validate">valider</string>
@@ -16,6 +17,8 @@
     <string name="kCal">kCal</string>
     <string name="pour">Pour</string>
     <string name="part">Part</string>
+    <string name="add">ajouter</string>
+    <string name="name">Nom</string>
 
 
 </resources>

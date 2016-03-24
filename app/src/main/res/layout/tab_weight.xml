@@ -52,6 +52,54 @@
             android:layout_marginLeft="25dp"
             android:layout_marginRight="25dp"
             android:paddingBottom="10dip" />
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginLeft="25dp"
+            android:layout_marginRight="25dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="@string/date"
+                android:layout_weight="0.25"
+                android:id="@+id/textView6" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="@string/poids"
+                android:layout_weight="0.25"
+                android:id="@+id/textView7" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="@string/difference"
+                android:layout_weight="0.25"
+                android:id="@+id/textView8" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="@string/difference2"
+                android:layout_weight="0.25"
+                android:id="@+id/textView9" />
+        </LinearLayout>
+
+        <ImageView
+            android:src="@android:drawable/divider_horizontal_bright"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:layout_marginLeft="25dp"
+            android:layout_marginRight="25dp"
+            android:paddingBottom="10dip" />
         <!--LinearLayout
             android:orientation="horizontal"
             android:layout_width="fill_parent"

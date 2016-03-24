@@ -18,23 +18,6 @@ import java.util.List;
 public class DBUtils extends SQLiteAssetHelper{
     public SQLiteDatabase myDataBase;
 
-    public static enum FoodElement{
-        Name, baseCalories, BaseWeight, Unit
-    }
-
-    public static enum DayElement{
-        DayId, Date, NumberOfPoints, WeekId
-    }
-
-    public static enum ConsumedFoodElement{
-        DayId, Name, Points
-    }
-
-    public static enum WeightElement{
-        NumberOfSportPoints, NumberOfHebdoPoints, DateEnd, DateStart, WeekId
-    }
-
-
     public DBUtils (Context context){
         this(context, "weight.db", null, 1);
     }
