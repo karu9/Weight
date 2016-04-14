@@ -43,7 +43,7 @@ public class Weight implements Comparable<Weight>{
     }
 
     public static String setWeightQuery(String value){
-        return "INSERT INTO Weight VALUES ("+DateUtil.formatDate(new Date())+","+value+")";
+        return "INSERT INTO Weight VALUES ('"+DateUtil.formatDate(new Date())+"','"+value+"')";
     }
 
     @Override

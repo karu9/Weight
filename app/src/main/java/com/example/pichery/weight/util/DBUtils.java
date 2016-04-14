@@ -4,12 +4,16 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
+import com.example.pichery.weight.model.ConsumedFood;
+import com.example.pichery.weight.model.Food;
 import com.example.pichery.weight.model.Profile;
+import com.example.pichery.weight.model.Week;
 import com.example.pichery.weight.model.Weight;
 import com.readystatesoftware.sqliteasset.SQLiteAssetHelper;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -45,7 +49,7 @@ public class DBUtils extends SQLiteAssetHelper{
     public Profile loadProfile(){
         try{
             openReadableDatabase();
-            Cursor cursor = myDataBase.rawQuery(Profile.getQuery(), null);
+            Cursor cursor = query(Profile.getQuery());
             cursor.moveToFirst();
             Profile profile = new Profile(cursor);
             cursor.close();
@@ -59,11 +63,15 @@ public class DBUtils extends SQLiteAssetHelper{
         }
     }
 
+    private Cursor query(String query) {
+        return myDataBase.rawQuery(query, null);
+    }
+
     public List<Weight> loadWeights(){
         List<Weight> ret = new ArrayList<Weight>();
         try{
             openReadableDatabase();
-            Cursor cursor = myDataBase.rawQuery(Weight.getQuery(), null);
+            Cursor cursor = query(Weight.getQuery());
             while(cursor.moveToNext()){
                 ret.add(new Weight(cursor));
             }
@@ -77,6 +85,69 @@ public class DBUtils extends SQLiteAssetHelper{
             closeDatabase();
         }
     }
+
+    public List<ConsumedFood> loadConsumedFood(Date date){
+        List<ConsumedFood> ret = new ArrayList<ConsumedFood>();
+        try{
+            openReadableDatabase();
+            Cursor cursor = query(ConsumedFood.getQuery(date));
+            while(cursor.moveToNext()){
+                ret.add(new ConsumedFood(cursor));
+            }
+            cursor.close();
+            return ret;
+        }
+        catch (SQLException e) {
+            return null;
+        }
+        finally{
+            closeDatabase();
+        }
+    }
+
+    public List<Week> loadWeeks(){
+        List<Week> ret = new ArrayList<Week>();
+        try{
+            openReadableDatabase();
+            Cursor cursor = query(Week.getQuery());
+            while(cursor.moveToNext()){
+                ret.add(new Week(cursor));
+            }
+            cursor.close();
+            return ret;
+        }
+        catch (SQLException e) {
+            return null;
+        }
+        finally{
+            closeDatabase();
+        }
+    }
+
+    public List<Food> loadFood(){
+        return this.loadFood(Food.getQuery());
+    }
+
+    public List<Food> loadFood(String query){
+        List<Food> ret = new ArrayList<Food>();
+        try{
+            openReadableDatabase();
+            Cursor cursor = query(query);
+            while(cursor.moveToNext()){
+                ret.add(new Food(cursor));
+            }
+            cursor.close();
+            return ret;
+        }
+        catch (SQLException e) {
+            return null;
+        }
+        finally{
+            closeDatabase();
+        }
+    }
+
+
 
     public void execute(String query){
         try{

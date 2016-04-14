@@ -1,15 +1,83 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@color/white"
+    android:fillViewport="false">
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:id="@+id/foodContainer">
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginLeft="25dp"
+            android:layout_marginRight="25dp">
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:text="miam"
-        android:textAppearance="?android:attr/textAppearanceLarge"/>
+            <EditText
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/findFoodText"
+                android:hint="@string/recherche"
+                android:textAlignment="center"
+                android:layout_weight=".66" />
 
-</RelativeLayout>
+            <Button
+                android:id="@+id/findFood"
+                android:layout_width="wrap_content"
+                android:layout_height="35dp"
+                android:text="@string/go"
+                android:gravity="left"
+                android:layout_marginTop="8dp"
+                android:layout_marginLeft="25dp"
+                android:layout_marginRight="25dp"/>
+        </LinearLayout>
+        <ImageView
+            android:src="@android:drawable/divider_horizontal_bright"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:layout_marginLeft="25dp"
+            android:layout_marginRight="25dp"
+            android:paddingBottom="10dip" />
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginLeft="25dp"
+            android:layout_marginRight="25dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="@string/name"
+                android:layout_weight="0.66"
+                android:id="@+id/textView10"
+                android:textAlignment="center" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="@string/pp"
+                android:layout_weight="0.33"
+                android:id="@+id/textView11"
+                android:textAlignment="center" />
+        </LinearLayout>
+
+        <ImageView
+            android:src="@android:drawable/divider_horizontal_bright"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:layout_marginLeft="25dp"
+            android:layout_marginRight="25dp"
+            android:paddingBottom="10dip" />
+
+    </LinearLayout>
+</ScrollView>

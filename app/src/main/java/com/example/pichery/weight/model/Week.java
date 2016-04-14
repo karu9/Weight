@@ -17,8 +17,8 @@ public class Week {
     private Date dateStart;
 
     public Week(Cursor cursor){
+        dateStart = DateUtil.getDate(cursor.getString(0));
         dateEnd = DateUtil.getDate(cursor.getString(1));
-        dateStart = DateUtil.getDate(cursor.getString(2));
     }
 
     private Week(Date dateStart, Date dateEnd){
@@ -26,19 +26,20 @@ public class Week {
         this.dateStart = dateStart;
     }
 
-    public Week getWeek(Date date, List<Week> weeks){
+    public static Week getWeek(Date date, List<Week> weeks, DBUtils dbUtil){
         for(Week week : weeks){
             if(date.after(week.dateStart) && date.before(week.dateEnd)) {
                 return week;
             }
         }
-        return null;
+        Week week = Week.createWeek(dbUtil);
+        return week;
     }
 
-    public Week createWeek(DBUtils dbUtils){
+    public static Week createWeek(DBUtils dbUtils){
         // Get calendar set to current date and time
         Calendar c = Calendar.getInstance();
-        c.add(Calendar.DATE, 7);
+        c.add(Calendar.DATE, 6);
         dbUtils.execute(createWeek(new Date(), c.getTime()));
         return new Week(new Date(), c.getTime());
     }
@@ -47,7 +48,15 @@ public class Week {
         return "Select * from Week";
     }
 
-    public String createWeek(Date dateStart, Date dateEnd){
-        return "Insert into Week VALUES = (\"" + DateUtil.formatDate(dateStart) + "\",\")" + DateUtil.formatDate(dateEnd) + "\")" ;
+    public static String createWeek(Date dateStart, Date dateEnd){
+        return "Insert into Week VALUES ('" + DateUtil.formatDate(dateStart) + "','" + DateUtil.formatDate(dateEnd) + "')" ;
+    }
+
+    public Date getDateStart(){
+        return dateStart;
+    }
+
+    public Date getDateEnd(){
+        return dateEnd;
     }
 }

@@ -7,11 +7,14 @@ import android.util.Log;
  */
 public class Calc {
     public static int calculatePointWeight(float weight, boolean female){
-        float calories = (2200f + (weight-75f) * 18f) * 0.70f;
-        if(female){
-            calories = (1959f + (weight-75f) * 12f) * 0.70f;
+        float sexFactor = 2225f;
+        if(female) {
+            sexFactor = 1952f;
         }
-        return Math.round(calories / 38f);
+        float weightFactor = (float) Math.pow(weight, 0.48);
+        float WWFactor = 0.7f;
+
+        return Math.round(weightFactor * sexFactor * WWFactor / 380f);
     }
 
     public static int calculatePoints(float calories){

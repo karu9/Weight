@@ -66,7 +66,6 @@ public class Weight extends AppCompatActivity {
             Intent i = new Intent(this, SettingsActivity.class);
             startActivityForResult(i, 0);
         }
-
         return super.onOptionsItemSelected(item);
     }
 }

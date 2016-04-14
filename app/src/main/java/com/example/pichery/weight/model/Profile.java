@@ -23,7 +23,7 @@ public class Profile {
     }
 
     public String setName(String name){
-        return "Update profile set name = \"" + name + "\"";
+        return "Update profile set name = '" + name + "'";
     }
 
     public String getSex(){
@@ -31,7 +31,7 @@ public class Profile {
     }
 
     public String setSex(String gender){
-        return "Update profile set Sex = \"" + gender + "\"";
+        return "Update profile set Sex = '" + gender + "'";
     }
 
 }

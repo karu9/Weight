@@ -1,14 +1,130 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:weightSum="1"
+    android:background="@color/white"
+    android:id="@+id/homeContainer">
 
-    <TextView
-        android:id="@+id/textViewHome"
+    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:background="@color/white"
+        android:fillViewport="false"
+        android:layout_weight="1">
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:weightSum="1"
+            android:id="@+id/contentContainer">
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="fill_parent"
+                android:layout_height="60dp"
+                android:layout_marginTop="0dp"
+                android:layout_marginLeft="0dp"
+                android:layout_marginRight="0dp"
+                android:layout_weight="0.84"
+                android:weightSum="1"
+                android:background="@color/blue">
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:id="@+id/leftPoints"
+                    android:layout_weight="0.33"
+                    android:background="@color/white"
+                    android:allowUndo="false"
+                    android:alpha="0.90"
+                    android:focusableInTouchMode="true"
+                    android:gravity="center_vertical|center" />
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:id="@+id/hebdoPoints"
+                    android:layout_weight="0.33"
+                    android:background="@color/white"
+                    android:alpha="0.90"
+                    android:gravity="center_vertical|center" />
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:id="@+id/sportPoints"
+                    android:layout_weight="0.34"
+                    android:background="@color/white"
+                    android:alpha="0.90"
+                    android:gravity="center_vertical|center" />
+            </LinearLayout>
+            <ImageView
+                android:src="@android:drawable/divider_horizontal_bright"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:layout_marginLeft="25dp"
+                android:layout_marginRight="25dp"
+                android:paddingBottom="10dip" />
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginLeft="25dp"
+                android:layout_marginRight="25dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:text="@string/name"
+                    android:layout_weight="0.5"
+                    android:id="@+id/textView23" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:text="@string/pp"
+                    android:layout_weight="0.5"
+                    android:id="@+id/textView24" />
+            </LinearLayout>
+
+            <ImageView
+                android:src="@android:drawable/divider_horizontal_bright"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:layout_marginLeft="25dp"
+                android:layout_marginRight="25dp"
+                android:paddingBottom="10dip" />
+        </LinearLayout>
+    </ScrollView>
+
+    <FrameLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:textAppearance="?android:attr/textAppearanceLarge"/>
+        android:layout_gravity="bottom|right"
+        android:background="@color/white">
 
-</RelativeLayout>
+        <android.support.design.widget.FloatingActionButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@android:color/transparent"
+            android:layout_margin="10dp"
+            android:id = "@+id/fastAdd"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/plus"
+            android:elevation="16dp"
+            android:textColor="@android:color/white"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    </FrameLayout>
+
+</LinearLayout>

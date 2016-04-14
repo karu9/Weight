@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:weightSum="1">
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/nameFast"
+        android:layout_weight="0.33"
+        android:hint = "@string/name"
+        android:gravity="center"/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/ppFast"
+        android:layout_weight="0.33"
+        android:hint = "@string/pp"
+        android:inputType="number"
+        android:gravity="center" />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/addToJournal"
+        android:id="@+id/addToJournalFastButton"
+        android:layout_gravity="center"
+        android:layout_weight="0.33" />
+</LinearLayout>

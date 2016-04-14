@@ -8,7 +8,7 @@
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:columnCount="2"
-        android:rowCount="5"
+        android:rowCount="7"
         android:columnOrderPreserved="false">
 
         <EditText
@@ -21,20 +21,10 @@
             android:layout_height="wrap_content"
             android:id="@+id/kCalText"
             android:layout_row="0"
-            android:layout_column="0" />
+            android:layout_column="0"
+            android:hint="@string/kCal"
+            android:layout_columnSpan="2" />
 
-        <TextView
-            android:gravity="center"
-            android:layout_gravity="fill"
-            android:layout_columnWeight="1"
-            android:layout_rowWeight="1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="@string/kCal"
-            android:id="@+id/textView2"
-            android:layout_row="0"
-            android:layout_column="1" />
 
         <EditText
             android:inputType="numberDecimal"
@@ -46,20 +36,9 @@
             android:layout_height="wrap_content"
             android:id="@+id/pourText"
             android:layout_row="1"
-            android:layout_column="0" />
-
-        <TextView
-            android:gravity="center"
-            android:layout_gravity="fill"
-            android:layout_columnWeight="1"
-            android:layout_rowWeight="1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="@string/pour"
-            android:id="@+id/textView4"
-            android:layout_row="1"
-            android:layout_column="1" />
+            android:layout_column="0"
+            android:hint="@string/pour"
+            android:layout_columnSpan="2" />
 
         <EditText
             android:inputType="numberDecimal"
@@ -71,20 +50,9 @@
             android:layout_height="wrap_content"
             android:id="@+id/partText"
             android:layout_row="2"
-            android:layout_column="0" />
-
-        <TextView
-            android:gravity="center"
-            android:layout_gravity="fill"
-            android:layout_columnWeight="1"
-            android:layout_rowWeight="1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="@string/part"
-            android:id="@+id/textView5"
-            android:layout_row="2"
-            android:layout_column="1" />
+            android:layout_column="0"
+            android:hint="@string/part"
+            android:layout_columnSpan="2" />
 
 
         <Button
@@ -110,7 +78,7 @@
             android:layout_row="3"
             android:layout_column="1" />
 
-        <TextView
+        <EditText
             android:gravity="center"
             android:layout_gravity="fill"
             android:layout_columnWeight="1"
@@ -121,7 +89,22 @@
             android:id="@+id/nameText"
             android:layout_row="4"
             android:layout_column="0"
-            android:hint="@string/name"/>
+            android:hint="@string/name"
+            android:layout_columnSpan="2"/>
+
+        <EditText
+            android:gravity="center"
+            android:layout_gravity="fill"
+            android:layout_columnWeight="1"
+            android:layout_rowWeight="1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:id="@+id/unitText"
+            android:layout_row="5"
+            android:layout_column="0"
+            android:hint="@string/unit"
+            android:layout_columnSpan="2" />
 
         <Button
             android:layout_gravity="fill"
@@ -129,10 +112,21 @@
             android:layout_rowWeight="1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/add"
-            android:id="@+id/addButton"
-            android:layout_row="4"
-            android:layout_column="1" />
+            android:text="@string/addToJournal"
+            android:id="@+id/addButtonJournal"
+            android:layout_row="6"
+            android:layout_column="0"/>
+
+        <Button
+            android:layout_gravity="fill"
+            android:layout_columnWeight="1"
+            android:layout_rowWeight="1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/addToDB"
+            android:id="@+id/addButtonList"
+            android:layout_row="6"
+            android:layout_column="1"/>
 
     </GridLayout>
 

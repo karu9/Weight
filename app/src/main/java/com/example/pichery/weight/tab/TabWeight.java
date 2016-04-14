@@ -20,10 +20,8 @@ import android.widget.TextView;
 import com.example.pichery.weight.R;
 import com.example.pichery.weight.model.Weight;
 import com.example.pichery.weight.util.DBUtils;
-import com.example.pichery.weight.util.DateUtil;
 
 import java.util.Collections;
-import java.util.Date;
 import java.util.List;
 
 public class TabWeight extends Fragment{
@@ -37,6 +35,10 @@ public class TabWeight extends Fragment{
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        initialise();
+    }
+
+    private void initialise() {
         dbUtil =  new DBUtils(getActivity());
         setValuesFromDb();
         setListener();
@@ -56,13 +58,7 @@ public class TabWeight extends Fragment{
                         if (weightval > 50) {
                             dbUtil.execute(Weight.setWeightQuery(weightString));
                             text.setText("", TextView.BufferType.EDITABLE);
-                            LinearLayout layout = (LinearLayout) getView().findViewById(R.id.weightContainer);
-                            layout.removeAllViews();
-                            LayoutInflater inflater = LayoutInflater.from(getActivity());
-                            View view = inflater.inflate(R.layout.tab_weight, null);
-                            layout.addView(view);
-                            setValuesFromDb();
-                            TabWeight.this.getView().invalidate();
+                            refresh();
                         }
                     } catch (NumberFormatException e) {
 
@@ -138,5 +134,15 @@ public class TabWeight extends Fragment{
         iv.setLayoutParams(lp);
         iv.setPadding(0,10,0,0);
         return iv;
+    }
+
+    public void refresh() {
+        LinearLayout layout = (LinearLayout) getView().findViewById(R.id.weightContainer);
+        layout.removeAllViews();
+        LayoutInflater inflater = LayoutInflater.from(getActivity());
+        View view = inflater.inflate(R.layout.tab_weight, null);
+        layout.addView(view);
+        initialise();
+        TabWeight.this.getView().invalidate();
     }
 }
