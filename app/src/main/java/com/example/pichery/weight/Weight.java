@@ -11,7 +11,6 @@ package com.example.pichery.weight;
 
         import com.example.pichery.weight.settings.SettingsActivity;
         import com.example.pichery.weight.tab.PagerAdapter;
-        import com.example.pichery.weight.tab.TabWeight;
 
 
 public class Weight extends AppCompatActivity {

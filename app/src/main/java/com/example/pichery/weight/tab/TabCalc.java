@@ -6,7 +6,8 @@ package com.example.pichery.weight.tab;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,7 +17,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.pichery.weight.R;
-import com.example.pichery.weight.model.ConsumedFood;
+import com.example.pichery.weight.listeners.AddFoodListener;
 import com.example.pichery.weight.model.Food;
 import com.example.pichery.weight.util.Calc;
 import com.example.pichery.weight.util.DBUtils;
@@ -29,7 +30,7 @@ public class TabCalc extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.tab_calc, container, false);
+        return inflater.inflate(R.layout.tab_calc2, container, false);
     }
 
     @Override
@@ -45,23 +46,32 @@ public class TabCalc extends Fragment {
 
 
     private void setListener() {
-        Button button = (Button) getView().findViewById(R.id.calculatePointButton);
-        button.setOnClickListener(new View.OnClickListener() {
+
+        EditText text = (EditText) getView().findViewById(R.id.partText);
+        text.addTextChangedListener(new TextWatcher() {
             @Override
-            public void onClick(View v) {
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
                 EditText kcaltext = (EditText) getView().findViewById(R.id.kCalText);
                 EditText pourText = (EditText) getView().findViewById(R.id.pourText);
                 EditText partText = (EditText) getView().findViewById(R.id.partText);
 
-                if(!kcaltext.getText().toString().isEmpty() && !pourText.getText().toString().isEmpty() && !partText.getText().toString().isEmpty()) {
+                if (!kcaltext.getText().toString().isEmpty() && !pourText.getText().toString().isEmpty() && !partText.getText().toString().isEmpty()) {
                     try {
                         float kCal = Float.valueOf(kcaltext.getText().toString());
                         float pour = Float.valueOf(pourText.getText().toString());
                         float part = Float.valueOf(partText.getText().toString());
-                        if(kCal != 0f && pour != 0f && part != 0f){
+                        if (kCal != 0f && pour != 0f && part != 0f) {
                             int points = Calc.calculatePoints(kCal * part / pour);
-                            TextView resultText = (TextView) getView().findViewById(R.id.pointResultText);
-                            resultText.setText(""+points);
+                            TextView resultText = (TextView) getView().findViewById(R.id.pointTextView);
+                            resultText.setText(getResources().getText(R.string.points).toString() + points);
                         }
                     } catch (Exception e) {
 
@@ -70,104 +80,9 @@ public class TabCalc extends Fragment {
             }
         });
 
-        button = (Button) getView().findViewById(R.id.addButtonJournal);
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                EditText kcaltext = (EditText) getView().findViewById(R.id.kCalText);
-                EditText pourText = (EditText) getView().findViewById(R.id.pourText);
-                EditText partText = (EditText) getView().findViewById(R.id.partText);
-                EditText nameText = (EditText) getView().findViewById(R.id.nameText);
+        Button button = (Button) getView().findViewById(R.id.addButton);
+        button.setOnClickListener(new AddFoodListener(getActivity(), getView()));
 
-                if (!kcaltext.getText().toString().isEmpty()
-                        && !pourText.getText().toString().isEmpty()
-                        && !nameText.getText().toString().isEmpty()
-                        && !partText.getText().toString().isEmpty()) {
-                    try {
-                        float kCal = Float.valueOf(kcaltext.getText().toString());
-                        float pour = Float.valueOf(pourText.getText().toString());
-                        float part = Float.valueOf(partText.getText().toString());
-                        String name = nameText.getText().toString();
-
-                        if (part != 0f && pour != 0f && kCal != 0f) {
-                            int points = Calc.calculatePoints(kCal * part / pour);
-                            dbUtil.execute(ConsumedFood.addConsumedFood(name, String.valueOf(points)));
-                            Toast toast = Toast.makeText(getActivity(), getActivity().getResources().getString(R.string.toastConsumedAdded), Toast.LENGTH_SHORT);
-                            toast.show();
-                            refreshTabHome();
-                        }
-
-                        eraseText();
-
-
-                    } catch (Exception e) {
-
-                    }
-                }
-            }
-        });
-
-        button = (Button) getView().findViewById(R.id.addButtonList);
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                EditText kcaltext = (EditText) getView().findViewById(R.id.kCalText);
-                EditText pourText = (EditText) getView().findViewById(R.id.pourText);
-                EditText nameText = (EditText) getView().findViewById(R.id.nameText);
-                EditText unitText = (EditText) getView().findViewById(R.id.unitText);
-
-                if (!kcaltext.getText().toString().isEmpty()
-                        && !pourText.getText().toString().isEmpty()
-                        && !nameText.getText().toString().isEmpty()
-                        && !unitText.getText().toString().isEmpty()) {
-                    try {
-                        float kCal = Float.valueOf(kcaltext.getText().toString());
-                        float pour = Float.valueOf(pourText.getText().toString());
-                        String name = nameText.getText().toString();
-                        String unit = unitText.getText().toString();
-                        if (kCal != 0f && pour != 0f) {
-                            List<Food> foods = dbUtil.loadFood(Food.searchFood(name));
-                            boolean addFood = true;
-                            if (foods.size() > 0) {
-                                for (Food food : foods) {
-                                    if (food.getName().equalsIgnoreCase(name)) {
-                                        addFood = false;
-                                        break;
-                                    }
-                                }
-                            }
-                            if (addFood) {
-                                dbUtil.execute(Food.addFoodQuery(name, String.valueOf(kCal), String.valueOf(pour), unit));
-                                Toast toast = Toast.makeText(getActivity(), getActivity().getResources().getString(R.string.toastFoodAdded), Toast.LENGTH_SHORT);
-                                toast.show();
-                                refreshTabFood();
-                            } else {
-                                Toast toast = Toast.makeText(getActivity(), getActivity().getResources().getString(R.string.toastFoodNotAdded), Toast.LENGTH_SHORT);
-                                toast.show();
-                            }
-
-
-                            eraseText();
-                        }
-                    } catch (Exception e) {
-
-                    }
-                }
-            }
-        });
-    }
-
-    public void eraseText(){
-        EditText kcaltext = (EditText) getView().findViewById(R.id.kCalText);
-        kcaltext.setText("");
-        EditText pourText = (EditText) getView().findViewById(R.id.pourText);
-        pourText.setText("");
-        EditText nameText = (EditText) getView().findViewById(R.id.nameText);
-        nameText.setText("");
-        EditText unitText = (EditText) getView().findViewById(R.id.unitText);
-        unitText.setText("");
-        EditText partText = (EditText) getView().findViewById(R.id.partText);
-        partText.setText("");
     }
 
     public void refreshTabHome(){

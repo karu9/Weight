@@ -24,8 +24,9 @@
     <string name="findFood">chercher</string>
     <string name="go">GO</string>
     <string name="pp">PPs</string>
-    <string name="unit">unité</string>
+    <string name="unit">Unité</string>
     <string name="toastConsumedAdded">Aliment ajouté au journal</string>
+    <string name="toastSportAdded">Sport ajouté au journal</string>
     <string name="toastConsumedNotAdded">Aliment non ajouté au journal</string>
     <string name="toastFoodAdded">Aliment ajouté à la liste</string>
     <string name="toastFoodNotAdded">Aliment deja existant</string>
@@ -36,6 +37,14 @@
     <string name="modify">Modifier</string>
     <string name="plus">+</string>
     <string name="fastAdd">Ajout Rapide</string>
+    <string name="sportAdd">Ajouter Sport</string>
+    <string name="points">PPs\n</string>
+    <string name="add">Ajouter</string>
+    <string name="addFood">Ajouter un aliment</string>
+    <string name="toastRemoved">Aliment supprimé</string>
+    <string name="sportRemoved">Sport supprimé</string>
+    <string name="time">temps</string>
+    <string name="addSport">Ajouter Sport</string>
 
 
 </resources>

@@ -45,4 +45,8 @@ public class ConsumedFood implements Comparable<ConsumedFood>{
     public static String getRemoveQuery(ConsumedFood food) {
         return "DELETE From ConsumedFood where name ='" + food.name + "' and points = '" + food.getPoints() + "' and date = '" + food.date + "'";
     }
+
+    public static String modifyConsumedFood(ConsumedFood food, String nameText, String pointsText) {
+        return "Update ConsumedFood Set name ='" + nameText +"', points = '" + pointsText + "' where name ='" + food.name + "' and points = '" + food.getPoints() + "' and date = '" + food.date + "'";
+    }
 }

@@ -60,4 +60,11 @@ public class Food implements Comparable<Food>{
         return "Insert into Food VALUES ('" + name + "','" + kCal + "','" + Pour + "','" + "NULL" + "','" + unit + "','" + "NULL" + "')";
     }
 
+    public static String getRemoveQuery(Food food) {
+        return "DELETE From Food where name ='" + food.name + "' and BaseCalories = '" + food.getBaseCalories() + "' and unit = '" + food.getUnit() + "' and BaseWeight = '" + food.getBaseWeight() + "'";
+    }
+
+    public static String modifyFood(Food food, String nameText, String caloriesText, String unitText, String pourText) {
+        return "UPDATE Food Set name='" + nameText + "', BaseCalories = '" + caloriesText + "', unit = '" + unitText + "', BaseWeight = '" + pourText + "' where name ='" + food.name + "' and BaseCalories = '" + food.getBaseCalories() + "' and unit = '" + food.getUnit() + "' and BaseWeight = '" + food.getBaseWeight() + "'";
+    }
 }

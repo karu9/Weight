@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:weightSum="1">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_weight="0.75"
+        android:weightSum="1">
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/nameText"
+            android:layout_weight="0.25"
+            android:hint = "@string/name"
+            android:gravity="center"
+            android:inputType="text"/>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/partText"
+            android:layout_weight="0.25"
+            android:hint = "@string/part"
+            android:gravity="center"
+            android:inputType="numberDecimal"/>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/unitText"
+            android:layout_weight="0.25"
+            android:hint = "@string/unit"
+            android:gravity="center"
+            android:inputType="text"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.25"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="@string/pp"
+            android:id="@+id/ppText"
+            android:gravity="center"/>
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.25"
+        android:weightSum="1">
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="@string/addToJournal"
+            android:id="@+id/addToJournal"
+            android:layout_weight="0.50" />
+        <Button
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:text="@string/addToDB"
+        android:id="@+id/addToList"
+            android:layout_weight="0.50" /></LinearLayout>
+</LinearLayout>

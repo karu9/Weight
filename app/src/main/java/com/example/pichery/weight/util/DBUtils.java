@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 import com.example.pichery.weight.model.ConsumedFood;
 import com.example.pichery.weight.model.Food;
 import com.example.pichery.weight.model.Profile;
+import com.example.pichery.weight.model.Sport;
 import com.example.pichery.weight.model.Week;
 import com.example.pichery.weight.model.Weight;
 import com.readystatesoftware.sqliteasset.SQLiteAssetHelper;
@@ -155,6 +156,25 @@ public class DBUtils extends SQLiteAssetHelper{
             myDataBase.execSQL(query);
         }
         catch (SQLException e) {
+        }
+        finally{
+            closeDatabase();
+        }
+    }
+
+    public List<Sport> loadSport(String query) {
+        List<Sport> ret = new ArrayList<Sport>();
+        try{
+            openReadableDatabase();
+            Cursor cursor = query(query);
+            while(cursor.moveToNext()){
+                ret.add(new Sport(cursor));
+            }
+            cursor.close();
+            return ret;
+        }
+        catch (SQLException e) {
+            return null;
         }
         finally{
             closeDatabase();

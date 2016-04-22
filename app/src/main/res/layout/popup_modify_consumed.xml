@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:weightSum="1">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_weight="0.75"
+        android:weightSum="1">
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/nameTextModifyFoodConsumed"
+            android:layout_weight="0.50"
+            android:hint = "@string/name"
+            android:gravity="center"
+            android:inputType="text"/>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/ppTextModifyFoodConsumed"
+            android:layout_weight="0.50"
+            android:hint="@string/pp"
+            android:gravity="center"
+            android:inputType="number"
+            android:layout_gravity="center_horizontal" />
+
+        EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/pourTextModifyFood"
+            android:layout_weight="0.25"
+            android:hint = "@string/pour"
+            android:gravity="center"
+            android:inputType="numberDecimal"/>
+
+        EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/unitTextModifyFood"
+            android:layout_weight="0.25"
+            android:hint = "@string/unit"
+            android:gravity="center"
+            android:inputType="text"/>
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.25"
+        android:weightSum="1">
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@string/modify"
+            android:id="@+id/modifyFoodConsumed" />
+    </LinearLayout>
+</LinearLayout>

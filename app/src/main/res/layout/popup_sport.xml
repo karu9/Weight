@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:weightSum="1">
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/addToJournal"
+        android:id="@+id/addToJournalButtonSport"
+        android:layout_gravity="center_horizontal"
+        android:layout_weight="0.33" />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/delete"
+        android:id="@+id/deleteButtonSport"
+        android:layout_gravity="center_horizontal"
+        android:layout_weight="0.33" />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/modify"
+        android:id="@+id/modifyButtonSport"
+        android:layout_gravity="center_horizontal"
+        android:layout_weight="0.33" />
+</LinearLayout>

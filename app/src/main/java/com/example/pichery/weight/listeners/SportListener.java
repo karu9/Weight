@@ -9,8 +9,9 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.example.pichery.weight.R;
-import com.example.pichery.weight.model.ConsumedFood;
-import com.example.pichery.weight.tab.TabHome;
+import com.example.pichery.weight.model.Food;
+import com.example.pichery.weight.model.Sport;
+import com.example.pichery.weight.tab.TabFood;
 import com.example.pichery.weight.util.DBUtils;
 
 import java.util.List;
@@ -18,48 +19,51 @@ import java.util.List;
 /**
  * Created by Doudouz on 14/04/2016.
  */
-public class HomeListener implements View.OnClickListener {
+public class SportListener implements View.OnClickListener {
 
-    private ConsumedFood food;
+    private Sport sport;
     private FragmentActivity activity;
 
-    public HomeListener(ConsumedFood food, FragmentActivity activity){
-        this.food = food;
+    public SportListener(Sport sport, FragmentActivity activity){
+        this.sport = sport;
         this.activity = activity;
     }
 
     @Override
     public void onClick(View v) {
         AlertDialog.Builder helpBuilder = new AlertDialog.Builder(activity);
-        helpBuilder.setTitle(food.getName() + " - " + food.getPoints() + activity.getResources().getString(R.string.pp));
+        helpBuilder.setTitle(sport.getName());
+
         LayoutInflater inflater = activity.getLayoutInflater();
-        View checkboxLayout = inflater.inflate(R.layout.popup_home, null);
+        View checkboxLayout = inflater.inflate(R.layout.popup_sport, null);
         helpBuilder.setView(checkboxLayout);
         final AlertDialog helpDialog = helpBuilder.create();
         helpDialog.show();
-        Button delete = (Button) checkboxLayout.findViewById(R.id.deleteButtonHome);
+        Button add = (Button) checkboxLayout.findViewById(R.id.addToJournalButtonSport);
+        add.setOnClickListener(new AddSportListener(sport, activity, helpDialog));
+
+        Button delete = (Button) checkboxLayout.findViewById(R.id.deleteButtonSport);
         delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new DBUtils(activity).execute(ConsumedFood.getRemoveQuery(food));
-                Toast toast = Toast.makeText(activity, activity.getResources().getString(R.string.toastRemoved), Toast.LENGTH_SHORT);
+                new DBUtils(activity).execute(Sport.getRemoveQuery(sport));
+                Toast toast = Toast.makeText(activity, activity.getResources().getString(R.string.sportRemoved), Toast.LENGTH_SHORT);
                 toast.show();
                 helpDialog.cancel();
-                refreshTabHome();
+                refreshTabFood();
             }
         });
 
-
-        Button modify = (Button) checkboxLayout.findViewById(R.id.modifyButtonHome);
-        modify.setOnClickListener(new ModifyListenerConsumed(food, activity, helpDialog));
+        Button modify = (Button) checkboxLayout.findViewById(R.id.modifyButtonSport);
+        modify.setOnClickListener(new ModifySportListener(sport, activity, helpDialog));
     }
 
-    private void refreshTabHome() {
+    public void refreshTabFood(){
         List<Fragment> listFragment = activity.getSupportFragmentManager().getFragments();
         if(listFragment != null && !listFragment.isEmpty()){
             for (Fragment frag : listFragment){
-                if(frag instanceof TabHome){
-                    ((TabHome) frag).refresh();
+                if(frag instanceof TabFood){
+                    ((TabFood) frag).refresh();
                     break;
                 }
             }

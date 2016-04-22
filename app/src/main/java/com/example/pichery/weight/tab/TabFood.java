@@ -68,10 +68,6 @@ public class TabFood extends Fragment {
         }
     }
 
-    private void setTouchListener(){
-
-    }
-
     private void setValuesFromDb(List<Food> foodList) {
         LinearLayout layout = (LinearLayout) getView().findViewById(R.id.foodContainer);
         Collections.sort(foodList);

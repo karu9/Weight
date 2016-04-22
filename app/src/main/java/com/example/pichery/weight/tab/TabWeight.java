@@ -1,28 +1,26 @@
-package com.example.pichery.weight.tab;
-
-/**
+package com.example.pichery.weight.tab; /**
  * Created by pichery on 29/11/15.
  */
 
-import android.content.res.ColorStateList;
-import android.graphics.Color;
-import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.TextView;
+        import android.content.res.ColorStateList;
+        import android.graphics.Color;
+        import android.os.Bundle;
+        import android.support.v4.app.Fragment;
+        import android.view.LayoutInflater;
+        import android.view.View;
+        import android.view.ViewGroup;
+        import android.widget.Button;
+        import android.widget.EditText;
+        import android.widget.ImageView;
+        import android.widget.LinearLayout;
+        import android.widget.TextView;
 
-import com.example.pichery.weight.R;
-import com.example.pichery.weight.model.Weight;
-import com.example.pichery.weight.util.DBUtils;
+        import com.example.pichery.weight.R;
+        import com.example.pichery.weight.model.Weight;
+        import com.example.pichery.weight.util.DBUtils;
 
-import java.util.Collections;
-import java.util.List;
+        import java.util.Collections;
+        import java.util.List;
 
 public class TabWeight extends Fragment{
 
